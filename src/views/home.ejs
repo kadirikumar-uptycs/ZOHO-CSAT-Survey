@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uptycs Feedback Survey</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-image {
+            max-width: 300px;
+            max-height: 100px;
+        }
+
+        .case-info {
+            background-color: #e1f5fe;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .feedback-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-block {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text::after {
+            content: '*';
+            color: red;
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            margin-left: 3px;
+            margin-right: 10px;
+        }
+
+        .rating-option {
+            text-align: center;
+        }
+
+        .rating-option input[type="radio"] {
+            display: none;
+        }
+
+        .rating-option label {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 2px solid #3498db;
+            border-radius: 50%;
+            color: #3498db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-option input[type="radio"]:checked+label {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .feedback>label::after {
+            content: '(optional)';
+            color: #B0B0B0;
+            font-style: italic;
+            font-size: 0.9em;
+            padding: 2px 5px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .feedback textarea,
+        .comments textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit-button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-button:hover {
+            background-color: #27ae60;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .feedback-container {
+                padding: 1rem;
+            }
+
+            .logo-image {
+                max-width: 200px;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .rating-option label {
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .logo-image {
+                max-width: 150px;
+            }
+
+            .case-info {
+                font-size: 1em;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .rating-scale {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .rating-option {
+                margin: 5px;
+            }
+
+            .rating-option label {
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 1rem;
+            }
+
+            .scale-labels {
+                font-size: 0.8rem;
+            }
+
+            .submit-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo-container">
+        <img class="logo-image" src="/public/images/uptycs_logo.png" alt="Uptycs Logo">
+    </div>
+
+    <div class="case-info">
+        Please rate how satisfied you are working with <%= ticketOwnerFullName%> on case #<%= ticketNumber%> regarding
+                <strong>
+                    <%= ticketSubject%>
+                </strong>
+    </div>
+
+    <form id="feedbackForm" class="feedback-container" method="post" action="/acknowledge">
+        <% const questions=[ { text: "How would you rate the responsiveness of our support team?" , min: "Very slow" ,
+            max: "Very quick" },{ text: "How well did " + ticketOwnerFullName + " understand your needs?" ,
+            min: "Not at all" , max: "Perfectly" }, { text: "How satisfied are you with the resolution of your case?" ,
+            min: "Very unsatisfied" , max: "Very satisfied" }, {
+            text: "How likely are you to recommend Uptycs to others?" , min: "Not at all likely" ,
+            max: "Extremely likely" }, { text: "How would you rate the overall quality of service?" , min: "Poor" ,
+            max: "Excellent" } ] %>
+
+            <% questions.forEach((question, index)=> { %>
+                <div class="question-block" id="question-block-<%= index %>">
+                    <h3 class="question-text">
+                        <%= index+1 + ". " + question.text %>
+                    </h3>
+                    <div class="rating-scale">
+                        <% for (let i=1; i <=10; i++) { %>
+                            <div class="rating-option">
+                                <input type="radio" id="q<%= index %>-<%= i %>" name="question<%= index %>"
+                                    value="<%= i %>">
+                                <label for="q<%= index %>-<%= i %>">
+                                    <%= i %>
+                                </label>
+                            </div>
+                            <% } %>
+                    </div>
+                    <div class="scale-labels">
+                        <span class="min-label">
+                            <%= question.min %>
+                        </span>
+                        <span class="max-label">
+                            <%= question.max %>
+                        </span>
+                    </div>
+                    <div class="error-message" id="error-question<%= index %>">Please provide a rating for this
+                        question.</div>
+                    <div class="feedback">
+                        <label for="feedback-<%= index %>">Please tell us why you gave us that score:</label>
+                        <textarea id="feedback-<%= index %>" name="feedback<%= index %>"></textarea>
+                    </div>
+                </div>
+                <% }) %>
+
+                    <div class="comments">
+                        <label for="comments">Additional comments:</label>
+                        <textarea id="comments" name="comments"></textarea>
+                    </div>
+
+                    <div class="hidden">
+                        <input type="hidden" id="ticketId" name="ticketId" value="<%= ticketId%>">
+                    </div>
+
+                    <div class="submit-container">
+                        <button type="submit" class="submit-button">Submit Feedback</button>
+                    </div>
+    </form>
+</body>
+
+<script>
+    document.getElementById('feedbackForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        let isValid = true;
+        let ticketOwnerFullName = "Uptycs Support Agent"
+        const questions = [
+            {
+                text: "How would you rate the responsiveness of our support team?", 
+                min: "Very slow",
+                max: "Very quick"
+            },
+            {
+                text: "How well did " + ticketOwnerFullName + " understand your needs?",
+                min: "Not at all", 
+                max: "Perfectly"
+            },
+            {
+                text: "How satisfied are you with the resolution of your case?",
+                min: "Very unsatisfied", 
+                max: "Very satisfied"
+            },
+            {
+                text: "How likely are you to recommend Uptycs to others?", 
+                min: "Not at all likely",
+                max: "Extremely likely"
+            },
+            {
+                text: "How would you rate the overall quality of service?", 
+                min: "Poor",
+                max: "Excellent"
+            }
+        ]
+        let invalidblock = questions.length-1;
+        questions.forEach((_, index) => {
+            const radioButtons = document.getElementsByName(`question${index}`);
+            const errorMessage = document.getElementById(`error-question${index}`);
+
+            let radioChecked = false;
+            for (let radio of radioButtons) {
+                if (radio.checked) {
+                    radioChecked = true;
+                    break;
+                }
+            }
+
+            if (!radioChecked) {
+                isValid = false;
+                invalidblock = Math.min(invalidblock, index);
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+
+        if (isValid) {
+            this.submit();
+        } else {
+            const element = document.getElementById(`question-block-${invalidblock}`);
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - 200;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+</script>
+
+</html>

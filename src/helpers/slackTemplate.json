@@ -1,0 +1,428 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Customer has given following feedback for the ticket *#5521*:"
+			}
+		},
+		{
+			"type": "section",
+			"block_id": "section567",
+			"text": {
+				"type": "mrkdwn",
+				"text": "<https://support.uptycs.com/agent/uptycs/all/tickets/details/565242000048940015| Testing... (Don't modify this ticket)> \n\n *Account Name*: Uptycs Inc\n*Customer Name*: Kadiri Mohan Kumar\n*Ticket Owner*: Kadiri Mohan Kumar"
+			},
+			"accessory": {
+				"type": "image",
+				"image_url": "https://raw.githubusercontent.com/kadirikumar-uptycs/Tools/main/feedback.png",
+				"alt_text": "Customer Feedback image"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "rich_text",
+			"elements": [
+				{
+					"type": "rich_text_section",
+					"elements": [
+						{
+							"type": "text",
+							"text": "1. How would you rate the responsiveness of our support team?\n",
+							"style": {
+								"bold": true
+							}
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "text",
+							"text": " (10)",
+							"style": {
+								"italic": true,
+								"bold": true
+							}
+						}
+					]
+				},
+				{
+					"type": "rich_text_preformatted",
+					"elements": [
+						{
+							"type": "text",
+							"text": "Their support team is very prompt, and they help me out quickly on most problems and fix them just in a second. I'm pretty much satisfied with the way things are handled since they assure that my problems are solved in the shortest possible time. This would make it so much easier to go through things."
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "rich_text",
+			"elements": [
+				{
+					"type": "rich_text_section",
+					"elements": [
+						{
+							"type": "text",
+							"text": "2. How well did Kadiri Mohan Kumar understand your needs?\n",
+							"style": {
+								"bold": true
+							}
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "text",
+							"text": " (10)",
+							"style": {
+								"italic": true,
+								"bold": true
+							}
+						}
+					]
+				},
+				{
+					"type": "rich_text_preformatted",
+					"elements": [
+						{
+							"type": "text",
+							"text": "Mohan Kumar understood very well. Their help was spot on with what I wanted to get. I felt supported all the way through, and their understanding made it easy and prompt for the solution."
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "rich_text",
+			"elements": [
+				{
+					"type": "rich_text_section",
+					"elements": [
+						{
+							"type": "text",
+							"text": "3. How satisfied are you with the resolution of your case?\n",
+							"style": {
+								"bold": true
+							}
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "text",
+							"text": " (10)",
+							"style": {
+								"italic": true,
+								"bold": true
+							}
+						}
+					]
+				},
+				{
+					"type": "rich_text_preformatted",
+					"elements": [
+						{
+							"type": "text",
+							"text": "I am quite satisfied with how my case was solved. The fix for the problem was very quick and efficient. I got more than I expected, and whatever solution was provided has been working perfectly since it was put into practice, making me happy at the way things have turned out."
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "rich_text",
+			"elements": [
+				{
+					"type": "rich_text_section",
+					"elements": [
+						{
+							"type": "text",
+							"text": "4. How likely are you to recommend Uptycs to others?\n",
+							"style": {
+								"bold": true
+							}
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "text",
+							"text": " (10)",
+							"style": {
+								"italic": true,
+								"bold": true
+							}
+						}
+					]
+				},
+				{
+					"type": "rich_text_preformatted",
+					"elements": [
+						{
+							"type": "text",
+							"text": "I am quite very likely to recommend Uptycs. They know the job, and I trust them completely after coming through for me when it really mattered."
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "rich_text",
+			"elements": [
+				{
+					"type": "rich_text_section",
+					"elements": [
+						{
+							"type": "text",
+							"text": "5. How would you rate the overall quality of service?\n",
+							"style": {
+								"bold": true
+							}
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "emoji",
+							"name": "star2"
+						},
+						{
+							"type": "text",
+							"text": " (10)",
+							"style": {
+								"italic": true,
+								"bold": true
+							}
+						}
+					]
+				},
+				{
+					"type": "rich_text_preformatted",
+					"elements": [
+						{
+							"type": "text",
+							"text": "Their service is generally very good. The team is professional and really knows what it's doing. I've been continually impressed not only by their quality of work but more so by the standard of service they seem to be able to provide time after time, making my dealings with them very satisfying."
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "View Ticket :arrow_right: ",
+						"emoji": true
+					},
+					"value": "click_view_ticket",
+					"url": "https://support.uptycs.com/agent/uptycs/all/tickets/details/565242000048940015",
+					"action_id": "click_view_ticket"
+				}
+			]
+		}
+	]
+}
