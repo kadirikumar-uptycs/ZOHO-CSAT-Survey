@@ -1,27 +1,41 @@
 const { sendFeedbackEmail } = require('../helpers/mailSender');
+const { generateHash, addOrUpdateTicketDetails } = require('../models/updateDB');
+
 
 let handleZohoEvents = (req, res) => {
-    console.log('Zoho Ticket Updated (Field: Send CSAT Survey)')
+    console.log('\nZoho Ticket has been updated (Field: Send CSAT Survey)')
     try {
         let data = req.body;
-        if(!data[0]?.payload?.accountId || data[0]?.payload?.accountId !== '565242000000211477'){
-            console.log(`⚠️  Skipping survey form for ${ticketNumber} as AccountName is not an Uptycs Inc`)
+        let payload;
+        if (Array.isArray(data)) {
+            payload = data[0]?.payload;
+            payload ??= {};
+        }
+        let accountId = data[0]?.payload?.accountId;
+        if (!accountId || accountId !== '565242000000211477') {
+            console.log(`⚠️  Skipping survey form for ${ticketNumber} because either AccountName is Empty or Uptycs Inc`)
             return res.status(200).send("success");
         }
-        let ticketId = data[0]?.payload?.id;
-        let isEnabled = data[0]?.payload?.cf?.cf_send_csat_survey
-        let customerEmail = data[0]?.payload?.email
-        let ticketSubject = data[0]?.payload?.subject
-        let ticketNumber = data[0]?.payload?.ticketNumber
-        let ticketOwnerFullName = (data[0]?.payload?.assignee?.firstName + ' ' + data[0]?.payload?.assignee?.lastName) || 'Support Agent'
-        let customerName = (data[0]?.payload?.contact?.firstName + ' ' + data[0]?.payload?.contact?.lastName) || 'Customer'
+        let isEnabled = payload?.cf?.cf_send_csat_survey;
+        let ticketInfo = {
+            ticketId: payload?.id,
+            customerEmail: payload?.email,
+            ticketSubject: payload?.subject,
+            ticketNumber: payload?.ticketNumber,
+            ticketOwnerFirstName: payload?.assignee?.firstName,
+            ticketOwnerLastName: payload?.assignee?.lastName,
+            customerFirstName: payload?.contact?.firstName,
+            customerLastName: payload?.contact?.lastName,
+            isResponded: false,
+        };
         let server_base_url = process.env.APP_BASE_URL;
-        if(isEnabled === 'true'){
+        if (isEnabled === 'true') {
+            let hashedTicketId = generateHash(ticketInfo.ticketId)
+            addOrUpdateTicketDetails(ticketInfo, ticketInfo.ticketId)
             console.log("⌛  Sending Feedform to the customer");
-            sendFeedbackEmail(ticketId, customerName, ticketNumber, customerEmail, server_base_url, ticketSubject, ticketOwnerFullName);
-            console.log("✅  Feedform has been sent to the customer");
+            sendFeedbackEmail(hashedTicketId, ticketInfo.customerFirstName, ticketInfo.ticketNumber, ticketInfo.customerEmail, server_base_url);
         } else {
-            console.log(`⚠️  Skipping survey form for ${ticketNumber} as cf_send_csat_survey is ${isEnabled}`)
+            console.log(`⚠️  Skipping survey form for ${ticketInfo?.ticketNumber} as cf_send_csat_survey is ${isEnabled}\n\n`)
         }
     } catch (err) {
         console.log("⛔ error while handling zoho events", err);

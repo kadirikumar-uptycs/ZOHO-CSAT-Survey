@@ -13,17 +13,19 @@ const transporter = nodemailer.createTransport({
 const sendMail = (mailOptions) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.log(error);
+            console.log("⛔ Error while sending Email to the customer\n", error);
+        }else{
+            console.log("✅  Feedform has been sent to the customer");
         }
     });
 }
 
-const sendFeedbackEmail = async (ticketId, customerName, ticketNumber, customerEmail, server_base_url, ticketSubject, ticketOwnerFullName) => {
+const sendFeedbackEmail = async (hashedTicketId, customerName, ticketNumber, customerEmail, server_base_url) => {
     try {
         let gmailOptions = {
             to: customerEmail,
             subject: 'How would you rate the support you received from Uptycs?',
-            html: emailTemplate(ticketId, ticketNumber, customerName, server_base_url, ticketSubject, ticketOwnerFullName),
+            html: emailTemplate(hashedTicketId, ticketNumber, customerName, server_base_url),
         }
         sendMail(gmailOptions);
     } catch (err) {

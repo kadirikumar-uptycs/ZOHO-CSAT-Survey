@@ -1,4 +1,4 @@
-const emailTemplate = (ticketId, ticketNumber, customerName, server_base_url, ticketSubject, ticketOwnerFullName) => {
+const emailTemplate = (hashedTicketId, ticketNumber, customerName, server_base_url) => {
     return `<!DOCTYPE html>
 <html lang="en">
 
@@ -89,7 +89,7 @@ const emailTemplate = (ticketId, ticketNumber, customerName, server_base_url, ti
                             <p>Hello <strong style="color: #6200ee;">${customerName}</strong>,</p>
                             <p>We'd love to hear your thoughts on our customer service. Your feedback is crucial in helping us improve.</p>
                             <p class="label"><strong style="color: #5d60b9;">Please take a moment to rate your recent support experience with ticket #${ticketNumber}:</strong></p>
-                            <a href="${server_base_url}/${ticketNumber}?id=${ticketId}&subject=${ticketSubject}&agent=${ticketOwnerFullName}" class="button" style="background: linear-gradient(135deg, #6200ee, #9d4edd); color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 20px;">
+                            <a href="${server_base_url}/${hashedTicketId}" class="button" style="background: linear-gradient(135deg, #6200ee, #9d4edd); color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 20px;">
                                 <font color="#FFF">Provide Feedback</font>
                             </a>
                         </td>

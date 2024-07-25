@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uptycs Feedback Survey</title>
+    <link rel="shortcut icon" href="/public/images/favicon.png" type="image/x-icon">
+    <title>Uptycs Customer Survey</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -230,7 +231,7 @@
     </div>
 
     <div class="case-info">
-        Please rate how satisfied you are working with <%= ticketOwnerFullName%> on case #<%= ticketNumber%> regarding
+        Please rate how satisfied you are working with <%= ticketOwnerFirstName%> <%= ticketOwnerLastName%>  on case #<%= ticketNumber%> regarding
                 <strong>
                     <%= ticketSubject%>
                 </strong>
@@ -238,7 +239,7 @@
 
     <form id="feedbackForm" class="feedback-container" method="post" action="/acknowledge">
         <% const questions=[ { text: "How would you rate the responsiveness of our support team?" , min: "Very slow" ,
-            max: "Very quick" },{ text: "How well did " + ticketOwnerFullName + " understand your needs?" ,
+            max: "Very quick" },{ text: "How well did " + ticketOwnerFirstName + " "+ ticketOwnerLastName + " understand your needs?" ,
             min: "Not at all" , max: "Perfectly" }, { text: "How satisfied are you with the resolution of your case?" ,
             min: "Very unsatisfied" , max: "Very satisfied" }, {
             text: "How likely are you to recommend Uptycs to others?" , min: "Not at all likely" ,
@@ -284,7 +285,7 @@
                     </div>
 
                     <div class="hidden">
-                        <input type="hidden" id="ticketId" name="ticketId" value="<%= ticketId%>">
+                        <input type="hidden" id="hashedTicketId" name="hashedTicketId" value="<%= hashedTicketId%>">
                     </div>
 
                     <div class="submit-container">
@@ -306,7 +307,7 @@
                 max: "Very quick"
             },
             {
-                text: "How well did " + ticketOwnerFullName + " understand your needs?",
+                text: "How well did Agent understand your needs?",
                 min: "Not at all", 
                 max: "Perfectly"
             },

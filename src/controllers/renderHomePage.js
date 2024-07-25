@@ -1,15 +1,18 @@
+let { getTicketDetailsByHashId } = require('../models/updateDB');
+
 const renderHomePage = (req, res) => {
-    let ticketId = req?.query?.id || 'ticketId';
-    let ticketSubject = req?.query?.subject || 'Subject';
-    let ticketNumber = req?.params?.ticketNumber || 'ticketNumber';
-    let ticketOwnerFullName = req?.query?.agent || 'Support Agent';
-    console.log(`📉 Feedback form opened by the customer for the ticket ${ticketNumber}`);
-    res.render('../views/home', {
-        ticketId,
-        ticketSubject,
-        ticketNumber,
-        ticketOwnerFullName,
-    });
+    try {
+        let hashedTicketId = req?.params?.hashedTicketId;
+        let ticketInfo = getTicketDetailsByHashId(hashedTicketId);
+        console.log(`📉 Feedback form opened by the customer for the ticket ${ticketInfo.ticketNumber}`);
+        res.render('../views/home', {
+            ...ticketInfo,
+            hashedTicketId
+        });
+    } catch (err) {
+        console.log('Error while Rendering Feedback form\n', err)
+        return res.status(500).send("INTERNAL SERVER ERROR");
+    }
 }
 
 module.exports = renderHomePage;
