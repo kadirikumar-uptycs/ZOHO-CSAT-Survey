@@ -8,12 +8,23 @@ let customerFeedback = (req, res) => {
         let ticketInfo = getTicketDetailsByHashId(data.hashedTicketId);
         let ticketId = ticketInfo.ticketId;
         updateZohoTicketField(ticketId, parseInt(data.question0));
-        markResponded(data, data.hashedTicketId);
+        let hashedTicketId = data.hashedTicketId;
         delete data.hashedTicketId;
-        res.render('../views/acknowledge');
+        let formattedData = []
+        for (let index = 0; index < 5; index++) {
+            let obj = {
+                questionNumber: index + 1,
+                score: data['question' + index],
+                feedback: data['feedback' + index]
+            }
+            formattedData.push(obj);
+        }
+        formattedData.push({ comments: data.comments })
+        markResponded(formattedData, hashedTicketId);
+        return res.render('../views/acknowledge');
     } catch (err) {
         console.log("⛔ Erroring while calling Update Function");
-        res.render('../views/acknowledge');
+        return res.render('../views/acknowledge');
     }
 }
 
