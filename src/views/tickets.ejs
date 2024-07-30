@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ticket Feedback Dashboard</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--primary-color: #3498db;
+			--secondary-color: #2ecc71;
+			--background-color: #f4f6f9;
+			--text-color: #34495e;
+			--card-bg: #ffffff;
+			--shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: var(--background-color);
+			color: var(--text-color);
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 2rem;
+		}
+
+		h1 {
+			text-align: center;
+			color: var(--primary-color);
+			font-size: 2.5rem;
+			margin-bottom: 2rem;
+		}
+
+		.ticket-card {
+			background-color: var(--card-bg);
+			border-radius: 10px;
+			box-shadow: var(--shadow);
+			padding: 2rem;
+			margin-bottom: 2rem;
+			transition: transform 0.3s ease;
+		}
+
+		.ticket-card:hover {
+			transform: translateY(-5px);
+		}
+
+		.ticket-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 1rem;
+		}
+
+		.ticket-id {
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: var(--primary-color);
+		}
+
+		.ticket-number {
+			font-size: 1rem;
+			color: var(--secondary-color);
+		}
+
+		.ticket-info {
+			margin-bottom: 1rem;
+		}
+
+		.ticket-info p {
+			margin: 0.5rem 0;
+		}
+
+		.feedback-section {
+			background-color: rgba(52, 152, 219, 0.1);
+			border-radius: 8px;
+			padding: 1rem;
+		}
+
+		.feedback-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 0.5rem;
+		}
+
+		.feedback-question {
+			font-weight: 600;
+		}
+
+		.feedback-score {
+			background-color: var(--secondary-color);
+			color: white;
+			padding: 0.25rem 0.5rem;
+			border-radius: 4px;
+		}
+
+		.feedback-comments {
+			margin-top: 1rem;
+			font-style: italic;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Ticket Feedback Dashboard</h1>
+
+		<% tickets.forEach(ticket=> { %>
+			<div class="ticket-card">
+				<div class="ticket-header">
+					<span class="ticket-id">Ticket ID: <%= ticket.ticketId %></span>
+					<span class="ticket-number">Ticket #<%= ticket.ticketNumber %></span>
+				</div>
+				<div class="ticket-info">
+					<p><strong>Subject:</strong>
+						<%= ticket.ticketSubject %>
+					</p>
+					<p><strong>Customer:</strong>
+						<%= ticket.customerFirstName %>
+							<%= ticket.customerLastName %>
+					</p>
+					<p><strong>Email:</strong>
+						<%= ticket.customerEmail %>
+					</p>
+					<p><strong>Account:</strong>
+						<%= ticket.accountName %>
+					</p>
+					<p><strong>Owner:</strong>
+						<%= ticket.ticketOwnerFirstName %>
+							<%= ticket.ticketOwnerLastName %>
+					</p>
+				</div>
+				<div class="feedback-section">
+					<h3>Customer Feedback</h3>
+					<% ticket.customerFeedback.forEach(feedback=> { %>
+						<% if (feedback.questionNumber) { %>
+							<div class="feedback-item">
+								<span class="feedback-question">Question <%= feedback.questionNumber %></span>
+								<span class="feedback-score">
+									<%= feedback.score %>/10
+								</span>
+							</div>
+							<p>
+								<%= feedback.feedback %>
+							</p>
+							<% } else if (feedback.comments) { %>
+								<div class="feedback-comments">
+									<strong>Additional Comments:</strong>
+									<p>
+										<%= feedback.comments %>
+									</p>
+								</div>
+								<% } %>
+									<% }) %>
+				</div>
+			</div>
+			<% }) %>
+	</div>
+</body>
+
+</html>
