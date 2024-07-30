@@ -1,6 +1,7 @@
 let fs = require('fs');
 let path = require('path');
 const crypto = require('crypto');
+const forwardFeedbackToSlack = require('../helpers/sendSlackMessage');
 
 
 const dataFile = path.join(__dirname, 'ticketDB.json');
@@ -45,21 +46,22 @@ function addOrUpdateTicketDetails(newRecord, ticketId) {
     writeDataToFile(data);
 }
 
-async function markResponded(feedback, hashedTicketId) {
+async function markResponded(customerFeedback, hashedTicketId) {
     try {
         const data = readDataFile();
         const recordIndex = data.findIndex(record => record.id === hashedTicketId);
         if (recordIndex !== -1) {
             data[recordIndex] = {
                 ...data[recordIndex],
-                feedback,
+                customerFeedback,
                 isResponded: true,
             }
-            console.log('✅ Updated DB File with Feedback')
+            forwardFeedbackToSlack(data[recordIndex]);
         } else {
             console.log('🛑 Record Not Found to concat feedback data')
         }
         writeDataToFile(data);
+        console.log('✅ Updated DB File with Feedback')
     } catch (err) {
         console.log('⛔ Error While Updating DB file with Feedback\n', err);
     }
