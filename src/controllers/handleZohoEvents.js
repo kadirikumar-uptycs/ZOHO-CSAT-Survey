@@ -19,6 +19,7 @@ let handleZohoEvents = (req, res) => {
         let isEnabled = payload?.cf?.cf_send_csat_survey;
         let ticketInfo = {
             ticketId: payload?.id,
+            URL: payload.webUrl,
             customerEmail: payload?.email,
             ticketSubject: payload?.subject,
             ticketNumber: payload?.ticketNumber,
@@ -26,6 +27,7 @@ let handleZohoEvents = (req, res) => {
             ticketOwnerLastName: payload?.assignee?.lastName,
             customerFirstName: payload?.contact?.firstName,
             customerLastName: payload?.contact?.lastName,
+            accountName: payload?.contact?.account?.accountName,
             isResponded: false,
         };
         let server_base_url = process.env.APP_BASE_URL;
