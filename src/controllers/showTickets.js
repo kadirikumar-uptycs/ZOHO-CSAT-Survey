@@ -2,6 +2,7 @@ let ticketData = require('../models/ticketDB.json');
 
 let showTickets = (_, res) => {
     try {
+        console.log('🧑‍💻 Requested for Tickets Info\n')
         return res.render('../views/tickets', {
             tickets: ticketData
         });
