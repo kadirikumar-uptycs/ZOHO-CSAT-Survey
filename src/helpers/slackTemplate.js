@@ -45,40 +45,44 @@ let feedbackBlock = ({ questionNumber, score, feedback }) => {
         "name": "star2"
     }));
 
+    let elements = [
+        {
+            "type": "rich_text_section",
+            "elements": [
+                {
+                    "type": "text",
+                    "text": `${questionNumber}. ${questions[questionNumber - 1]} \n`,
+                    "style": {
+                        "bold": true
+                    }
+                },
+                ...starsBlock,
+                {
+                    "type": "text",
+                    "text": ` (${score})`,
+                    "style": {
+                        "italic": true,
+                        "bold": true
+                    }
+                }
+            ]
+        }
+    ]
+    if (feedback) {
+        elements.push({
+            "type": "rich_text_preformatted",
+            "elements": [
+                {
+                    "type": "text",
+                    "text": feedback
+                }
+            ]
+        })
+    }
+
     return {
         "type": "rich_text",
-        "elements": [
-            {
-                "type": "rich_text_section",
-                "elements": [
-                    {
-                        "type": "text",
-                        "text": `${questionNumber}. ${questions[questionNumber-1]} \n`,
-                        "style": {
-                            "bold": true
-                        }
-                    },
-                    ...starsBlock,
-                    {
-                        "type": "text",
-                        "text": ` (${score})`,
-                        "style": {
-                            "italic": true,
-                            "bold": true
-                        }
-                    }
-                ]
-            },
-            {
-                "type": "rich_text_preformatted",
-                "elements": [
-                    {
-                        "type": "text",
-                        "text": feedback
-                    }
-                ]
-            }
-        ]
+        elements,
     }
 
 }
@@ -98,8 +102,9 @@ let slackMessageBody = (customerFeedback) => {
 }
 
 let slackMessageFooter = (comments, URL) => {
-    return [
-        {
+    let footerBlocks = [];
+    if (comments) {
+        footerBlocks.push({
             "type": "rich_text",
             "elements": [
                 {
@@ -112,7 +117,10 @@ let slackMessageFooter = (comments, URL) => {
                     ]
                 }
             ]
-        },
+        })
+    }
+    return [
+        ...footerBlocks,
         {
             "type": "actions",
             "elements": [
@@ -137,7 +145,7 @@ let slackMessageFooter = (comments, URL) => {
 let slackFeedbackMessageBlocks = (ticketInfo) => {
     let comments = "Comments"
     let customerFeedback = ticketInfo?.customerFeedback;
-    if(Array.isArray(customerFeedback)){
+    if (Array.isArray(customerFeedback)) {
         comments = customerFeedback.at(-1)?.comments;
     }
     let headers = slackMessageHeader(ticketInfo);
