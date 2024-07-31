@@ -23,6 +23,7 @@ const sendMail = (mailOptions) => {
 const sendFeedbackEmail = async (hashedTicketId, customerName, ticketNumber, customerEmail, server_base_url) => {
     try {
         let gmailOptions = {
+            from: 'Uptycs Customer Success customersuccess@uptycs.com',
             to: customerEmail,
             subject: 'How would you rate the support you received from Uptycs?',
             html: emailTemplate(hashedTicketId, ticketNumber, customerName, server_base_url),
